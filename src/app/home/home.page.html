@@ -1,0 +1,65 @@
+<ion-header [translucent]="true" style="margin-bottom: 10px;">
+  <ion-toolbar color="dark">
+    <!-- <ion-title class="ion-text-center">
+      Lockdown Utility
+    </ion-title> -->
+    <ion-title class="ion-text-center">
+      Utility
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label color="secondary" position="stacked">Start Date</ion-label>
+    <ion-datetime id="customDayShortNames" [min]="currentDate" display-format="DD MMM, YYYY"
+      month-short-names="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" [(ngModel)]="toDate">
+    </ion-datetime>
+  </ion-item>
+  <div class="error-container">
+    <div class="error-message" *ngIf="toDate === undefined && submitted">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <span>Please provide the start date</span>
+    </div>
+  </div>
+  <ion-item>
+    <ion-label color="secondary" position="stacked">End Date</ion-label>
+    <ion-datetime [min]="currentDate" display-format="DD MMM, YYYY"
+      month-short-names="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" [(ngModel)]="fromDate">
+    </ion-datetime>
+  </ion-item>
+  <div class="error-container">
+    <div class="error-message" *ngIf="fromDate === undefined && submitted">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <span>Please provide the end date</span>
+    </div>
+  </div>
+  <ion-item>
+    <ion-label color="secondary" position="stacked">Select utility</ion-label>
+    <ion-input (ionFocus)="showPicker()" [(ngModel)]="selectedUtil" spellcheck="false"></ion-input>
+  </ion-item>
+  <div class="error-container">
+    <div class="error-message" *ngIf="selectedUtil === undefined && submitted">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <span>Please select the utility</span>
+    </div>
+  </div>
+  <ion-item *ngIf="showInput">
+    <ion-input placeholder="Add utility" (keyup.enter)="addData()" [(ngModel)]="utilText" spellcheck="false"
+      clearInput="true" autofocus="true"></ion-input>
+  </ion-item>
+  <div class="error-container">
+    <div class="error-message" *ngIf="utilText === undefined && submitted && showInput">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <span>Please input the utility</span>
+    </div>
+  </div>
+  <ion-item lines="none" class="ion-padding">
+    <ion-button size="block" (click)="setGoal()" color="dark">SET GOAL</ion-button>
+  </ion-item>
+  <ion-fab style="bottom: 10px; right: 10px;">
+    <ion-fab-button (click)="addUtil()" color="dark">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

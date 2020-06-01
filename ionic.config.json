@@ -1,0 +1,7 @@
+{
+  "name": "Lockdown_utility",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
